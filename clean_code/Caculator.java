@@ -1,4 +1,4 @@
-package caculator;
+package clean_code;
 
 public class Caculator {
 	public static final char ADDITION = '+';
