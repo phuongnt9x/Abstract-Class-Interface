@@ -13,31 +13,27 @@ public class CrawNews {
 
 	public static void main(String[] args) {
 		try {
-            URL url = new URL("https://dantri.com.vn/the-gioi.htm");
-            // open the stream and put it into BufferedReader
-            Scanner scanner = new Scanner(new InputStreamReader(url.openStream()));
-            scanner.useDelimiter("\\Z");
-            String content = scanner.next();
-            // close scanner 
-            scanner.close();
-            
-            // remove all new line
-            content = content.replaceAll("\\n+", "");
-            
-            // regex
-//            Pattern p = Pattern.compile("name_song\">(.*?)</a>");
-            Pattern p=Pattern.compile("<div class=\"article-excerpt\"> <a [A-z-=\"\\s/\\d\\.]+>(.*)</a> </div>");
-            Matcher m = p.matcher(content);
-            while (m.find()) {
-                System.out.println(m.group(1));
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+			URL url = new URL("https://dantri.com.vn/the-gioi.htm");
+			Scanner scanner = new Scanner(new InputStreamReader(url.openStream()));
+			scanner.useDelimiter("\\Z");
+			String content = scanner.next();
+			scanner.close();
+			content = content.replaceAll("\\n+", "");
+			Pattern pattern = Pattern.compile(
+					"<div class=\\\"article-excerpt\\\"> <a [A-z-=\\\"\\s/\\d\\.]+>([\\d\\(\\)\\,\\.aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆ fFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTu\\-UùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]*)</a");
+			Matcher matcher = pattern.matcher(content);
+			while (matcher.find()) {
+				System.out.println(matcher.group(1));
+				System.out.println("-----------------------");
+			}
+			System.out.println();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
